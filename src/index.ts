@@ -1,13 +1,8 @@
 // Load the package
-import {
-  Client,
-  ClientConfig,
-  middleware,
-  MiddlewareConfig,
-  WebhookEvent,
-} from "@line/bot-sdk";
+import { Client, ClientConfig, middleware, MiddlewareConfig, WebhookEvent } from "@line/bot-sdk";
 import express from "express";
 import dotenv from "dotenv";
+// import { FetchQiitaData } from "./common/api/qiita/FetchQiitaData";
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
@@ -43,7 +38,15 @@ app.post(
 
     // Assign only the 0th element of the array from the events array to a variable.
     const events: WebhookEvent[] = req.body.events;
-  }
+
+    events.map(async (event: WebhookEvent): Promise<void> => {
+      try {
+        // await FetchQiitaData();
+      } catch (err: unknown) {
+        console.log(err);
+      }
+    });
+  },
 );
 
 // Start the server
