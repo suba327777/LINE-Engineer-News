@@ -6,9 +6,11 @@
   "scripts": {
     "tsc": "tsc",
     "clean": "rimraf dist",
-    "dev": "ts-node-dev --respawn src/common/api/qiita/FetchQiitaData.ts",
+    "ngrok": "ngrok http 3000",
+    "dev": "ts-node-dev --respawn src/index.ts",
     "build": "npm-run-all clean tsc",
     "lint": "npx eslint --fix ./src/ && npx prettier --write ./src/"
+
   },
   "keywords": [],
   "author": "",
