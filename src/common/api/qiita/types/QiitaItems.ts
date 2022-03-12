@@ -1,7 +1,7 @@
 // 使用する型
 export type QiitaItem = Pick<
   QiitaItemResponse,
-  "id" | "title" | "likes_count" | "user" | "url"
+  "title" | "likes_count" | "user" | "url"
 >;
 
 // QiitaApiのレスポンスの　型
