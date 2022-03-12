@@ -1,7 +1,14 @@
 // Load the package
-import { Client, ClientConfig, middleware, MiddlewareConfig, WebhookEvent } from "@line/bot-sdk";
+import {
+  Client,
+  ClientConfig,
+  middleware,
+  MiddlewareConfig,
+  WebhookEvent,
+} from "@line/bot-sdk";
 import express from "express";
 import dotenv from "dotenv";
+import { QiitaArticleMessage } from "./common/template/message/QiitaArticleMessage";
 // import { FetchQiitaData } from "./common/api/qiita/FetchQiitaData";
 dotenv.config();
 
@@ -36,18 +43,29 @@ app.post(
     // Respond to LINE side with status code 200 ahead of time.
     res.sendStatus(200);
 
-    // Assign only the 0th element of the array from the events array to a variable.
-    const events: WebhookEvent[] = req.body.events;
-
-    events.map(async (event: WebhookEvent): Promise<void> => {
-      try {
-        // await FetchQiitaData();
-      } catch (err: unknown) {
-        console.log(err);
-      }
-    });
+    // リプライメッセージ機能はつけないのでなし
+    // const events: WebhookEvent[] = req.body.events;
+    // console.log(events);
+    // events.map(async (event: WebhookEvent): Promise<void> => {
+    //   try {
+    //
+    //   } catch (err: unknown) {
+    //     console.log(err);
+    //   }
+    // });
   },
 );
+
+// もし文字列がなかったらこの関数を実行する
+(async (): Promise<void> => {
+  try {
+    const message = await QiitaArticleMessage();
+
+    client.broadcast(message);
+  } catch (err: unknown) {
+    console.log(err);
+  }
+})();
 
 // Start the server
 app.listen(PORT, (): void => {
