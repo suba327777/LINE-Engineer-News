@@ -1,11 +1,5 @@
-// 使用する型
-export type QiitaItem = Pick<
-  QiitaItemResponse,
-  "title" | "likes_count" | "user" | "url"
->;
-
 // QiitaApiのレスポンスの　型
-export interface QiitaItemResponse {
+export type QiitaItemResponse = {
   rendered_body: string;
   body: string;
   coediting: boolean;
@@ -54,4 +48,9 @@ export interface QiitaItemResponse {
   team_membership: {
     name: string;
   };
-}
+};
+
+export type QiitaItem = {
+  setUrl: string[];
+  setTitle: string[];
+};

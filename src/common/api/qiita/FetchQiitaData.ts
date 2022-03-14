@@ -5,8 +5,8 @@ export const FetchQiitaData = async () => {
   try {
     const nowDate = new Date();
 
-    let setTitle: any = [];
-    let setUrl: any = [];
+    let setTitle = [""];
+    let setUrl = [""];
 
     const stocks = "stocks:>=10";
 
@@ -14,6 +14,7 @@ export const FetchQiitaData = async () => {
       params: {
         //    5件の記事を取得する
         per_page: 5,
+        // 記事のストック数が10以上
         query: stocks,
       },
     })
@@ -22,13 +23,11 @@ export const FetchQiitaData = async () => {
           setTitle[i] = val.title;
           setUrl[i] = val.url;
         });
-        // console.log(res);
       })
       .catch((err: unknown) => {
         console.log(err);
       });
-    console.log(setTitle);
-    return setUrl;
+    return { setUrl, setTitle };
   } catch (err: unknown) {
     console.log(err);
   }
