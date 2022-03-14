@@ -1,10 +1,8 @@
 import { QiitaApiClient } from "./QiitaApiClient";
-import { QiitaItem, QiitaItemResponse } from "./types/QiitaItems";
+import { QiitaItemResponse } from "./types/QiitaItemType";
 
-export const FetchQiitaData = async () => {
+export const FetchQiitaData = async (): Promise<any> => {
   try {
-    const nowDate = new Date();
-
     let setTitle = [""];
     let setUrl = [""];
 
