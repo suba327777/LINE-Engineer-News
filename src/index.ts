@@ -4,13 +4,14 @@ import {
   ClientConfig,
   middleware,
   MiddlewareConfig,
-  WebhookEvent,
 } from "@line/bot-sdk";
 import express from "express";
 import dotenv from "dotenv";
-import { QiitaArticleMessage } from "./common/template/message/QiitaArticleMessage";
-// import { FetchQiitaData } from "./common/api/qiita/FetchQiitaData";
 dotenv.config();
+
+import { QiitaArticleMessage } from "./common/template/message/QiitaArticleMessage";
+import { NewsArticleMessage } from "./common/template/message/NewsArticleMessage";
+import { GreetingMessage } from "./common/template/message/GreetingMessage";
 
 const PORT = process.env.PORT || 3000;
 
@@ -44,24 +45,14 @@ app.post(
     res.sendStatus(200);
 
     // リプライメッセージ機能はつけないのでなし
-    // const events: WebhookEvent[] = req.body.events;
-    // console.log(events);
-    // events.map(async (event: WebhookEvent): Promise<void> => {
-    //   try {
-    //
-    //   } catch (err: unknown) {
-    //     console.log(err);
-    //   }
-    // });
   },
 );
 
-// もし文字列がなかったらこの関数を実行する
 (async (): Promise<void> => {
   try {
-    const message = await QiitaArticleMessage();
-
-    client.broadcast(message);
+    client.broadcast(GreetingMessage());
+    client.broadcast(await QiitaArticleMessage());
+    client.broadcast(await NewsArticleMessage());
   } catch (err: unknown) {
     console.log(err);
   }
