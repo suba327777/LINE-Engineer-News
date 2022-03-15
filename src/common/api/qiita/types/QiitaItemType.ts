@@ -49,8 +49,3 @@ export type QiitaItemResponse = {
     name: string;
   };
 };
-
-export type QiitaItem = {
-  setUrl: string[];
-  setTitle: string[];
-};
