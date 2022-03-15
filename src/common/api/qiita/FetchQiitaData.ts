@@ -6,14 +6,12 @@ export const FetchQiitaData = async (): Promise<any> => {
     let setTitle = [""];
     let setUrl = [""];
 
-    const stocks = "stocks:>=10";
-
     await QiitaApiClient.get<Array<QiitaItemResponse>>("/items", {
       params: {
         //    5件の記事を取得する
         per_page: 5,
         // 記事のストック数が10以上
-        query: stocks,
+        query: "stocks:>=10",
       },
     })
       .then((res) => {
