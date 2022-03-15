@@ -2,7 +2,7 @@
   "name": "line-typescript",
   "version": "1.0.0",
   "description": "LINE-TypescriptTemplate",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "tsc": "tsc",
     "clean": "rimraf dist",
