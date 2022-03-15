@@ -1,38 +1,12 @@
 import { TextMessage } from "@line/bot-sdk";
 
 import { FetchNewsData } from "../../api/news/FetchNewsData";
-import { NewsItem } from "../../api/news/types/NewsItemType";
+import { FetchMessage } from "../../module/FetchMessage";
 
 export const NewsArticleMessage = async (): Promise<TextMessage> => {
-  const NewsArticle: any = await FetchNewsData();
-  const data: NewsItem = NewsArticle;
+  const data: any = await FetchNewsData();
 
-  let titleMessage = "";
-  let urlMessage = "";
-  let numberList = 1;
-  data.setTitle.map((res) => {
-    const addTitleMessage = res;
-    if (titleMessage == "") {
-      titleMessage = `[${numberList}]${addTitleMessage}`;
-      numberList++;
-    } else {
-      titleMessage += `\n\n[${numberList}]${addTitleMessage}`;
-      numberList++;
-    }
-  });
-  numberList = 1;
-  data.setUrl.map((res) => {
-    const addUrlMessage = res;
-    if (urlMessage == "") {
-      urlMessage = `[${numberList}]${addUrlMessage}`;
-      numberList++;
-    } else {
-      urlMessage += `\n\n[${numberList}]${addUrlMessage}`;
-      numberList++;
-    }
-  });
-
-  const message = titleMessage + "\n\n" + urlMessage;
+  const message: string = await FetchMessage(data);
 
   return {
     type: "text",
