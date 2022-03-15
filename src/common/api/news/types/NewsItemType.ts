@@ -14,8 +14,3 @@ export type NewsItemResponse = {
     },
   ];
 };
-
-export type NewsItem = {
-  setUrl: string[];
-  setTitle: string[];
-};
