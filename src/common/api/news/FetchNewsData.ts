@@ -1,5 +1,3 @@
-// export cnost FetchNewsData=
-
 import { NewsApiClient } from "./NewsApiClient";
 import { NewsItemResponse } from "./types/NewsItemType";
 
@@ -23,7 +21,6 @@ export const FetchNewsData = async (): Promise<any> => {
         from: ISO,
         // 今日まで
         to: today,
-
         // 人気の記事の順に並び替える
         sortBy: "popularity",
       },
