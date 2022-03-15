@@ -1,0 +1,1 @@
+{"version":3,"file":"GreetingMessage.js","sourceRoot":"","sources":["../../../../src/common/template/message/GreetingMessage.ts"],"names":[],"mappings":";;;AAEO,MAAM,eAAe,GAAG,GAAgB,EAAE;IAC/C,MAAM,KAAK,GAAW,IAAI,IAAI,EAAE,CAAC,kBAAkB,CAAC,OAAO,CAAC,CAAC;IAE7D,OAAO;QACL,IAAI,EAAE,MAAM;QACZ,IAAI,EAAE,gBAAgB,KAAK,aAAa;KACzC,CAAC;AACJ,CAAC,CAAC;AAPW,QAAA,eAAe,mBAO1B"}
