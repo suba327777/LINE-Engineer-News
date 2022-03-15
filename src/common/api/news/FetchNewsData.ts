@@ -5,8 +5,8 @@ import { NewsItemResponse } from "./types/NewsItemType";
 
 export const FetchNewsData = async (): Promise<any> => {
   try {
-    let setTitle = [""];
-    let setUrl = [""];
+    const setTitle = [""];
+    const setUrl = [""];
 
     const today = new Date();
     const yesterday = new Date();
@@ -29,7 +29,7 @@ export const FetchNewsData = async (): Promise<any> => {
       },
     })
       .then((res) => {
-        res.data.articles.map((val, i: number) => {
+        res.data.articles.forEach((val, i: number) => {
           setTitle[i] = val.title;
           setUrl[i] = val.url;
         });

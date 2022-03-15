@@ -5,9 +5,9 @@ export const FetchMessage = async (data: SetItem): Promise<any> => {
     let titleMessage = "";
     let urlMessage = "";
     let numberList = 1;
-    data.setTitle.map((res) => {
+    data.setTitle.forEach((res) => {
       const addTitleMessage = res;
-      if (titleMessage == "") {
+      if (titleMessage === "") {
         titleMessage = `[${numberList}]${addTitleMessage}`;
         numberList++;
       } else {
@@ -16,9 +16,9 @@ export const FetchMessage = async (data: SetItem): Promise<any> => {
       }
     });
     numberList = 1;
-    data.setUrl.map((res) => {
+    data.setUrl.forEach((res) => {
       const addUrlMessage = res;
-      if (urlMessage == "") {
+      if (urlMessage === "") {
         urlMessage = `[${numberList}]${addUrlMessage}`;
         numberList++;
       } else {

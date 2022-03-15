@@ -3,8 +3,8 @@ import { QiitaItemResponse } from "./types/QiitaItemType";
 
 export const FetchQiitaData = async (): Promise<any> => {
   try {
-    let setTitle = [""];
-    let setUrl = [""];
+    const setTitle = [""];
+    const setUrl = [""];
 
     await QiitaApiClient.get<Array<QiitaItemResponse>>("/items", {
       params: {
@@ -15,7 +15,7 @@ export const FetchQiitaData = async (): Promise<any> => {
       },
     })
       .then((res) => {
-        res.data.map((val, i: number) => {
+        res.data.forEach((val, i: number) => {
           setTitle[i] = val.title;
           setUrl[i] = val.url;
         });

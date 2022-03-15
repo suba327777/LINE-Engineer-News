@@ -7,11 +7,12 @@ import {
 } from "@line/bot-sdk";
 import express from "express";
 import dotenv from "dotenv";
-dotenv.config();
 
 import { QiitaArticleMessage } from "./common/template/message/QiitaArticleMessage";
 import { NewsArticleMessage } from "./common/template/message/NewsArticleMessage";
 import { GreetingMessage } from "./common/template/message/GreetingMessage";
+
+dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 
