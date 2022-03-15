@@ -14,8 +14,8 @@ export const FetchNewsData = async (): Promise<any> => {
     await NewsApiClient.get<NewsItemResponse>("/everything", {
       params: {
         //   検索する記事
-        q: "プログラミング",
-        // 5件の記事を取得する
+        q: "プログラミング OR エンジニア",
+        // 10件の記事を取得する
         pageSize: 10,
         // 昨日から
         from: ISO,
