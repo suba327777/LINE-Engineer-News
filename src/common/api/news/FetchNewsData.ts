@@ -3,22 +3,19 @@ import { NewsItemResponse } from "./types/NewsItemType";
 
 export const FetchNewsData = async (): Promise<any> => {
   try {
-    const setTitle = [""];
-    const setUrl = [""];
-
     const today = new Date();
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
-    const ISO = yesterday.toISOString();
+    const formatYesterday = yesterday.toISOString();
 
-    await NewsApiClient.get<NewsItemResponse>("/everything", {
+    const newsData = await NewsApiClient.get<NewsItemResponse>("/everything", {
       params: {
         //   検索する記事
         q: "プログラミング OR エンジニア",
         // 10件の記事を取得する
         pageSize: 10,
         // 昨日から
-        from: ISO,
+        from: formatYesterday,
         // 今日まで
         to: today,
         // 人気の記事の順に並び替える
@@ -26,16 +23,13 @@ export const FetchNewsData = async (): Promise<any> => {
       },
     })
       .then((res) => {
-        res.data.articles.forEach((val, i: number) => {
-          setTitle[i] = val.title;
-          setUrl[i] = val.url;
-        });
+        return res.data;
       })
-      .catch((err: undefined) => {
+      .catch((err: unknown) => {
         console.log(err);
       });
 
-    return { setTitle, setUrl };
+    return newsData;
   } catch (err: unknown) {
     console.log(err);
   }

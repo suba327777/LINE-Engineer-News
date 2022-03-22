@@ -3,27 +3,25 @@ import { QiitaItemResponse } from "./types/QiitaItemType";
 
 export const FetchQiitaData = async (): Promise<any> => {
   try {
-    const setTitle = [""];
-    const setUrl = [""];
-
-    await QiitaApiClient.get<Array<QiitaItemResponse>>("/items", {
-      params: {
-        //    5件の記事を取得する
-        per_page: 5,
-        // 記事のストック数が10以上
-        query: "stocks:>=10",
+    const qiitaData = await QiitaApiClient.get<Array<QiitaItemResponse>>(
+      "/items",
+      {
+        params: {
+          //    5件の記事を取得する
+          per_page: 5,
+          // 記事のストック数が10以上
+          query: "stocks:>=10",
+        },
       },
-    })
+    )
       .then((res) => {
-        res.data.forEach((val, i: number) => {
-          setTitle[i] = val.title;
-          setUrl[i] = val.url;
-        });
+        return res.data;
       })
       .catch((err: unknown) => {
         console.log(err);
       });
-    return { setUrl, setTitle };
+
+    return qiitaData;
   } catch (err: unknown) {
     console.log(err);
   }
