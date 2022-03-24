@@ -1,3 +1,11 @@
+// 使用する型
+export type NewsItem = {
+  title: string;
+  url: string;
+  urlToImage: string;
+};
+
+// NewsApiのレスポンスの　型
 export type NewsItemResponse = {
   status: string;
   totalResults: number;
@@ -10,7 +18,6 @@ export type NewsItemResponse = {
       url: string;
       urlToImage: string;
       publishedAt: string;
-      content: string;
     },
   ];
 };
