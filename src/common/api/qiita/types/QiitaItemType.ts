@@ -1,12 +1,18 @@
+// 使用する型
+export type QiitaItem = Pick<
+  QiitaItemResponse,
+  "title" | "likes_count" | "user" | "url" | "created_at"
+>;
+
 // QiitaApiのレスポンスの　型
 export type QiitaItemResponse = {
   rendered_body: string;
   body: string;
   coediting: boolean;
   comments_count: number;
-  created_at: string;
+  created_at: Date;
   group: {
-    created_at: string;
+    created_at: Date;
     description: string;
     name: string;
     private: boolean;
@@ -24,7 +30,7 @@ export type QiitaItemResponse = {
     },
   ];
   title: string;
-  updated_at: string;
+  updated_at: Date;
   url: string;
   user: {
     description: string;
