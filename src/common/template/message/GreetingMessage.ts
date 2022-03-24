@@ -1,3 +1,4 @@
+/*  packages */
 import { TextMessage } from "@line/bot-sdk";
 
 export const GreetingMessage = (): TextMessage => {
