@@ -1,15 +1,70 @@
-import { TextMessage } from "@line/bot-sdk";
-
+/*  packages */
+import { FlexBubble, FlexMessage, FlexCarousel } from "@line/bot-sdk";
+/* modules */
 import { FetchNewsData } from "../../api/news/FetchNewsData";
-import { FetchMessage } from "../../module/FetchMessage";
 
-export const NewsArticleMessage = async (): Promise<TextMessage> => {
-  const data: any = await FetchNewsData();
+/* types */
+import { NewsItem } from "../../api/news/types/NewsItemType";
 
-  const message: string = await FetchMessage(data);
+export const NewsArticleMessage = async (): Promise<FlexMessage> => {
+  const NewsData: any = await FetchNewsData();
 
-  return {
-    type: "text",
-    text: message,
+  const FlexMessageContents: FlexBubble[] = await NewsData.map((val: NewsItem) => {
+    let urlImage = val.urlToImage;
+    const fileExtension = urlImage.split(".").pop();
+
+    if (fileExtension === "svg") {
+      urlImage = "https://source.unsplash.com/featured/?programming";
+    }
+
+    const flexBuble: FlexBubble = {
+      type: "bubble",
+      hero: {
+        type: "image",
+        url: urlImage,
+        size: "full",
+        aspectMode: "cover",
+        aspectRatio: "20:13",
+      },
+      body: {
+        type: "box",
+        layout: "vertical",
+        contents: [
+          {
+            type: "text",
+            text: val.title,
+            wrap: true,
+          },
+        ],
+      },
+      footer: {
+        type: "box",
+        layout: "horizontal",
+        contents: [
+          {
+            type: "button",
+            style: "link",
+            action: {
+              type: "uri",
+              label: "詳細はこちらをクリック!!",
+              uri: val.url,
+            },
+          },
+        ],
+      },
+    };
+    return flexBuble;
+  });
+
+  const flexContainer: FlexCarousel = {
+    type: "carousel",
+    contents: FlexMessageContents,
   };
+
+  const flexMessage: FlexMessage = {
+    type: "flex",
+    altText: "記事の一覧になります",
+    contents: flexContainer,
+  };
+  return flexMessage;
 };
