@@ -1,16 +1,11 @@
-// Load the package
-import {
-  Client,
-  ClientConfig,
-  middleware,
-  MiddlewareConfig,
-} from "@line/bot-sdk";
+/*  packages */
+import { Client, ClientConfig, middleware, MiddlewareConfig } from "@line/bot-sdk";
 import express from "express";
 import dotenv from "dotenv";
-
+/* messages */
 import { QiitaArticleMessage } from "./common/template/message/QiitaArticleMessage";
 import { NewsArticleMessage } from "./common/template/message/NewsArticleMessage";
-import { GreetingMessage } from "./common/template/message/GreetingMessage";
+import { GreetingMessage } from "./common/template/message/CommentMessage";
 
 dotenv.config();
 

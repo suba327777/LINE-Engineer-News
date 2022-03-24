@@ -33,20 +33,21 @@ export const NewsArticleMessage = async (): Promise<FlexMessage> => {
           {
             type: "text",
             text: val.title,
+            weight: "bold",
             wrap: true,
           },
         ],
       },
       footer: {
         type: "box",
-        layout: "horizontal",
+        layout: "vertical",
         contents: [
           {
             type: "button",
             style: "link",
             action: {
               type: "uri",
-              label: "詳細はこちらをクリック!!",
+              label: "詳細はこちらをClick!!",
               uri: val.url,
             },
           },
