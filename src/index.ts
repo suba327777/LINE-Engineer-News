@@ -37,22 +37,28 @@ app.post(
   "/webhook",
   middleware(middlewareConfig),
   async (req: express.Request, res: express.Response): Promise<void> => {
+    try {
+      client.broadcast(GreetingMessage());
+      client.broadcast(await QiitaArticleMessage());
+      client.broadcast(await NewsArticleMessage());
+    } catch (err: unknown) {
+      console.log(err);
+    }
+
     // Respond to LINE side with status code 200 ahead of time.
     res.sendStatus(200);
-
-    // リプライメッセージ機能はつけないのでなし
   },
 );
 
-(async (): Promise<void> => {
-  try {
-    client.broadcast(GreetingMessage());
-    client.broadcast(await QiitaArticleMessage());
-    client.broadcast(await NewsArticleMessage());
-  } catch (err: unknown) {
-    console.log(err);
-  }
-})();
+// (async (): Promise<void> => {
+//   try {
+//     client.broadcast(GreetingMessage());
+//     client.broadcast(await QiitaArticleMessage());
+//     client.broadcast(await NewsArticleMessage());
+//   } catch (err: unknown) {
+//     console.log(err);
+//   }
+// })();
 
 // Start the server
 app.listen(PORT, (): void => {
