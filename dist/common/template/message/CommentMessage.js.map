@@ -1,0 +1,1 @@
+{"version":3,"file":"CommentMessage.js","sourceRoot":"","sources":["../../../../src/common/template/message/CommentMessage.ts"],"names":[],"mappings":";;;AAGO,MAAM,cAAc,GAAG,GAAgB,EAAE;IAC9C,MAAM,KAAK,GAAW,IAAI,IAAI,EAAE,CAAC,kBAAkB,CAAC,OAAO,CAAC,CAAC;IAE7D,OAAO;QACL,IAAI,EAAE,MAAM;QACZ,IAAI,EAAE,GAAG,KAAK,aAAa;KAC5B,CAAC;AACJ,CAAC,CAAC;AAPW,QAAA,cAAc,kBAOzB"}
