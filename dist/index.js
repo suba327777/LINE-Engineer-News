@@ -41,11 +41,6 @@ app.get("/", (req, res) => {
 });
 // App Routing
 app.post("/webhook", (0, bot_sdk_1.middleware)(middlewareConfig), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // Respond to LINE side with status code 200 ahead of time.
-    res.sendStatus(200);
-    // リプライメッセージ機能はつけないのでなし
-}));
-(() => __awaiter(void 0, void 0, void 0, function* () {
     try {
         client.broadcast((0, CommentMessage_1.GreetingMessage)());
         client.broadcast(yield (0, QiitaArticleMessage_1.QiitaArticleMessage)());
@@ -54,7 +49,18 @@ app.post("/webhook", (0, bot_sdk_1.middleware)(middlewareConfig), (req, res) => 
     catch (err) {
         console.log(err);
     }
-}))();
+    // Respond to LINE side with status code 200 ahead of time.
+    res.sendStatus(200);
+}));
+// (async (): Promise<void> => {
+//   try {
+//     client.broadcast(GreetingMessage());
+//     client.broadcast(await QiitaArticleMessage());
+//     client.broadcast(await NewsArticleMessage());
+//   } catch (err: unknown) {
+//     console.log(err);
+//   }
+// })();
 // Start the server
 app.listen(PORT, () => {
     console.log(`Application is live and listening on port ${PORT}`);
