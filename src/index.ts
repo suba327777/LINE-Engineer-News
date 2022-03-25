@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 /* messages */
 import { QiitaArticleMessage } from "./common/template/message/QiitaArticleMessage";
 import { NewsArticleMessage } from "./common/template/message/NewsArticleMessage";
-import { GreetingMessage } from "./common/template/message/CommentMessage";
+import { CommentMessage } from "./common/template/message/CommentMessage";
 
 dotenv.config();
 
@@ -38,7 +38,7 @@ app.post(
   middleware(middlewareConfig),
   async (req: express.Request, res: express.Response): Promise<void> => {
     try {
-      client.broadcast(GreetingMessage());
+      client.broadcast(CommentMessage());
       client.broadcast(await QiitaArticleMessage());
       client.broadcast(await NewsArticleMessage());
     } catch (err: unknown) {
@@ -49,17 +49,6 @@ app.post(
     res.sendStatus(200);
   },
 );
-
-// (async (): Promise<void> => {
-//   try {
-//     client.broadcast(GreetingMessage());
-//     client.broadcast(await QiitaArticleMessage());
-//     client.broadcast(await NewsArticleMessage());
-//   } catch (err: unknown) {
-//     console.log(err);
-//   }
-// })();
-
 // Start the server
 app.listen(PORT, (): void => {
   console.log(`Application is live and listening on port ${PORT}`);

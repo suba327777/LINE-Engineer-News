@@ -1,7 +1,7 @@
 /*  packages */
 import { TextMessage } from "@line/bot-sdk";
 
-export const GreetingMessage = (): TextMessage => {
+export const CommentMessage = (): TextMessage => {
   const today: string = new Date().toLocaleDateString("ja-JP");
 
   return {
