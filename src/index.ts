@@ -37,18 +37,16 @@ app.post(
   "/webhook",
   middleware(middlewareConfig),
   async (req: express.Request, res: express.Response): Promise<void> => {
-    try {
-      client.broadcast(CommentMessage());
-      client.broadcast(await QiitaArticleMessage());
-      client.broadcast(await NewsArticleMessage());
-    } catch (err: unknown) {
-      console.log(err);
-    }
-
     // Respond to LINE side with status code 200 ahead of time.
     res.sendStatus(200);
   },
 );
+
+(async () => {
+  client.broadcast(CommentMessage());
+  client.broadcast(await QiitaArticleMessage());
+  client.broadcast(await NewsArticleMessage());
+})();
 // Start the server
 app.listen(PORT, (): void => {
   console.log(`Application is live and listening on port ${PORT}`);
