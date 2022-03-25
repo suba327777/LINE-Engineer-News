@@ -22,5 +22,8 @@ QRコード
 Qiitaに記事を書きました
 
 ↓↓↓
-
+[LINEbot]毎朝プログラミングに関する記事を通知してくれるbotを作った話
 https://qiita.com/menasuba/items/ba66a8b0fa2f40345ee5
+
+自作のLINEbotにFlexMessageを実装するまで
+https://qiita.com/menasuba/items/aa0a20e65d7c4e04b4c1
