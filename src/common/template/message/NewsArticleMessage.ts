@@ -8,12 +8,21 @@ import { NewsItem } from "../../api/news/types/NewsItemType";
 
 export const NewsArticleMessage = async (): Promise<FlexMessage> => {
   const NewsData: any = await FetchNewsData();
-
+  console.log(NewsData);
   const FlexMessageContents: FlexBubble[] = await NewsData.map((val: NewsItem) => {
     let urlImage = val.urlToImage;
+
+    if (urlImage === null) {
+      urlImage = "null";
+    }
+
     const fileExtension = urlImage.split(".").pop();
 
-    if (fileExtension === "svg") {
+    if (fileExtension === "png") {
+      urlImage = val.urlToImage;
+    } else if (fileExtension === "jpg") {
+      urlImage = val.urlToImage;
+    } else {
       urlImage = "https://source.unsplash.com/featured/?programming";
     }
 
