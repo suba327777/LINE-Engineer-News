@@ -14,10 +14,20 @@ exports.NewsArticleMessage = void 0;
 const FetchNewsData_1 = require("../../api/news/FetchNewsData");
 const NewsArticleMessage = () => __awaiter(void 0, void 0, void 0, function* () {
     const NewsData = yield (0, FetchNewsData_1.FetchNewsData)();
+    console.log(NewsData);
     const FlexMessageContents = yield NewsData.map((val) => {
         let urlImage = val.urlToImage;
+        if (urlImage === null) {
+            urlImage = "null";
+        }
         const fileExtension = urlImage.split(".").pop();
-        if (fileExtension === "svg") {
+        if (fileExtension === "png") {
+            urlImage = val.urlToImage;
+        }
+        else if (fileExtension === "jpg") {
+            urlImage = val.urlToImage;
+        }
+        else {
             urlImage = "https://source.unsplash.com/featured/?programming";
         }
         const flexBuble = {

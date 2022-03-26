@@ -41,17 +41,14 @@ app.get("/", (req, res) => {
 });
 // App Routing
 app.post("/webhook", (0, bot_sdk_1.middleware)(middlewareConfig), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        client.broadcast((0, CommentMessage_1.CommentMessage)());
-        client.broadcast(yield (0, QiitaArticleMessage_1.QiitaArticleMessage)());
-        client.broadcast(yield (0, NewsArticleMessage_1.NewsArticleMessage)());
-    }
-    catch (err) {
-        console.log(err);
-    }
     // Respond to LINE side with status code 200 ahead of time.
     res.sendStatus(200);
 }));
+(() => __awaiter(void 0, void 0, void 0, function* () {
+    client.broadcast((0, CommentMessage_1.CommentMessage)());
+    client.broadcast(yield (0, QiitaArticleMessage_1.QiitaArticleMessage)());
+    client.broadcast(yield (0, NewsArticleMessage_1.NewsArticleMessage)());
+}))();
 // Start the server
 app.listen(PORT, () => {
     console.log(`Application is live and listening on port ${PORT}`);
