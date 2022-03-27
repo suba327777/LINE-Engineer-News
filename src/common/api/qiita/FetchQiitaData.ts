@@ -28,7 +28,6 @@ export const FetchQiitaData = async (): Promise<any> => {
         console.log(err);
       });
 
-    console.log(qiitaData);
     return qiitaData;
   } catch (err: unknown) {
     console.log(err);

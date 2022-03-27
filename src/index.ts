@@ -1,11 +1,10 @@
 /*  packages */
-import { Client, ClientConfig, middleware, MiddlewareConfig } from "@line/bot-sdk";
+import { Client, ClientConfig, middleware, MiddlewareConfig, WebhookEvent } from "@line/bot-sdk";
 import express from "express";
 import dotenv from "dotenv";
-/* messages */
-import { QiitaArticleMessage } from "./common/template/message/QiitaArticleMessage";
-import { NewsArticleMessage } from "./common/template/message/NewsArticleMessage";
-import { CommentMessage } from "./common/template/message/CommentMessage";
+/* Send */
+import { SendMessage } from "./common/send/SendMessage";
+import { SendFollow } from "./common/send/SendFollow";
 
 dotenv.config();
 
@@ -37,16 +36,23 @@ app.post(
   "/webhook",
   middleware(middlewareConfig),
   async (req: express.Request, res: express.Response): Promise<void> => {
+    // Assign only the 0th element of the array from the events array to a variable.
+    const events: WebhookEvent[] = req.body.events;
+
+    // 受信した全てのイベントを処理する
+    events.map(async (event: WebhookEvent): Promise<void> => {
+      try {
+        await SendMessage(client, event);
+        await SendFollow(client, event);
+      } catch (err: unknown) {
+        console.log(err);
+      }
+    });
     // Respond to LINE side with status code 200 ahead of time.
     res.sendStatus(200);
   },
 );
 
-(async () => {
-  client.broadcast(CommentMessage());
-  client.broadcast(await QiitaArticleMessage());
-  client.broadcast(await NewsArticleMessage());
-})();
 // Start the server
 app.listen(PORT, (): void => {
   console.log(`Application is live and listening on port ${PORT}`);

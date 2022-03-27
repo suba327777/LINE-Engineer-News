@@ -8,7 +8,7 @@ import { NewsItem } from "../../api/news/types/NewsItemType";
 
 export const NewsArticleMessage = async (): Promise<FlexMessage> => {
   const NewsData: any = await FetchNewsData();
-  console.log(NewsData);
+
   const FlexMessageContents: FlexBubble[] = await NewsData.map((val: NewsItem) => {
     let urlImage = val.urlToImage;
 
