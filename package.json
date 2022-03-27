@@ -9,7 +9,7 @@
     "ngrok": "ngrok http 3000",
     "dev": "ts-node-dev --respawn src/index.ts",
     "build": "npm-run-all clean tsc",
-    "broadcast": "node dist/index.js",
+    "broadcast": "node dist/common/send/SendBroadCast.js",
     "lint": "npx eslint --fix ./src/ && npx prettier --write ./src/",
     "prepare": "husky install",
     "check-types": "tsc --pretty --noEmit",
