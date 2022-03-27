@@ -16,10 +16,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const bot_sdk_1 = require("@line/bot-sdk");
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
-/* messages */
-const QiitaArticleMessage_1 = require("./common/template/message/QiitaArticleMessage");
-const NewsArticleMessage_1 = require("./common/template/message/NewsArticleMessage");
-const CommentMessage_1 = require("./common/template/message/CommentMessage");
+/* Send */
+const SendMessage_1 = require("./common/send/SendMessage");
+const SendFollow_1 = require("./common/send/SendFollow");
 dotenv_1.default.config();
 const PORT = process.env.PORT || 3000;
 // Setup all LINE client and Express configurations.
@@ -41,14 +40,21 @@ app.get("/", (req, res) => {
 });
 // App Routing
 app.post("/webhook", (0, bot_sdk_1.middleware)(middlewareConfig), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // Assign only the 0th element of the array from the events array to a variable.
+    const events = req.body.events;
+    // 受信した全てのイベントを処理する
+    events.map((event) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            yield (0, SendMessage_1.SendMessage)(client, event);
+            yield (0, SendFollow_1.SendFollow)(client, event);
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }));
     // Respond to LINE side with status code 200 ahead of time.
     res.sendStatus(200);
 }));
-(() => __awaiter(void 0, void 0, void 0, function* () {
-    client.broadcast((0, CommentMessage_1.CommentMessage)());
-    client.broadcast(yield (0, QiitaArticleMessage_1.QiitaArticleMessage)());
-    client.broadcast(yield (0, NewsArticleMessage_1.NewsArticleMessage)());
-}))();
 // Start the server
 app.listen(PORT, () => {
     console.log(`Application is live and listening on port ${PORT}`);

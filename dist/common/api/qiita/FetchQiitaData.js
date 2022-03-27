@@ -36,7 +36,6 @@ const FetchQiitaData = () => __awaiter(void 0, void 0, void 0, function* () {
             .catch((err) => {
             console.log(err);
         });
-        console.log(qiitaData);
         return qiitaData;
     }
     catch (err) {

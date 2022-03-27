@@ -14,7 +14,6 @@ exports.NewsArticleMessage = void 0;
 const FetchNewsData_1 = require("../../api/news/FetchNewsData");
 const NewsArticleMessage = () => __awaiter(void 0, void 0, void 0, function* () {
     const NewsData = yield (0, FetchNewsData_1.FetchNewsData)();
-    console.log(NewsData);
     const FlexMessageContents = yield NewsData.map((val) => {
         let urlImage = val.urlToImage;
         if (urlImage === null) {
